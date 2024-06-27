@@ -55,7 +55,7 @@ const Homepage = () => {
             <div className="card-body d-flex flex-column">
               <h5 className="card-title">Venue Search</h5>
               <p className="card-text">This feature helps users locate venues where events are held. Users can search by venue name, location, or venue type (e.g., stadiums, theaters, clubs). The search results include detailed information about each venue, such as the address, capacity, seating charts, and a list of upcoming events at that venue. This helps users find suitable venues for their interests and plan their visits accordingly.</p>
-              <a href="#" className="btn btn-primary mt-auto">Search Now</a>
+              <a href="venues" className="btn btn-primary mt-auto">Search Now</a>
             </div>
           </div>
         </div>
