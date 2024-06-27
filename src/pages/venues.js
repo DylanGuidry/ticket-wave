@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Attractions() {
+function Venues() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ function Attractions() {
   const searchAttractions = async (e) => {
     e.preventDefault();
     const apiKey = "9PokvHnOcPzH0q0Gd3NaCDwhJRt9byCb";
-    const url = `https://app.ticketmaster.com/discovery/v2/attractions.json?apikey=${apiKey}&keyword=${query}`;
+    const url = `https://app.ticketmaster.com/discovery/v2/venues.json?apikey=${apiKey}&keyword=${query}`;
   
     fetch(url)
       .then(response => {
@@ -20,7 +20,7 @@ function Attractions() {
       })
       .then(data => {
         if (data._embedded) {
-          setResults(data._embedded.attractions);
+          setResults(data._embedded.venues);
         } else {
           setResults([]);
         }
@@ -31,14 +31,10 @@ function Attractions() {
       });
   };
 
-  const handleDetailsClick = (id) => {
-    navigate(`/attractions/${id}`);
-  };
-
   return (
     <div className="container mt-5">
       <div className="text-center mb-4">
-        <h1>Welcome to Attractions Finder</h1>
+        <h1>Welcome to Venues Finder</h1>
         <p className="lead">Discover events, venues, and performances around you.</p>
       </div>
       <div className="row justify-content-center">
@@ -60,20 +56,15 @@ function Attractions() {
         {results.length > 0 && (
           <ul className="list-group mt-4">
             <div className="row">
-              {results.map((attraction) => (
-                <div key={attraction.id} className="col-sm-6 col-md-4 col-lg-3 mb-4">
+              {results.map((venues) => (
+                <div key={venues.id} className="col-sm-6 col-md-4 col-lg-3 mb-4">
                   <div className="card h-100">
-                    <img src={attraction.images[0].url} className="card-img-top" alt={attraction.name} />
+                    <img src={venues.images[0].url} className="card-img-top" alt={venues.name} />
                     <div className="card-body">
-                      <h5 className="card-title">{attraction.name}</h5>
-                      <p className="card-text">{attraction.classifications[0].segment.name}</p>
+                      <h5 className="card-title">{venues.name}</h5>
+                      <p className="card-text">{venues.classifications[0].segment.name}</p>
                     </div>
                     <div className="card-footer">
-                      <button 
-                        className="btn btn-primary" 
-                        onClick={() => handleDetailsClick(attraction.id)}>
-                        Event Details
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -86,4 +77,4 @@ function Attractions() {
   );
 }
 
-export default Attractions;
+export default Venues;
